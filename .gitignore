@@ -20,9 +20,9 @@
 # Private Node Modules
 node_modules/
 creds.js
+*lock.json
  
 # Private Files
-*.json
 *.csv
 *.csv.gz
 *.tsv
