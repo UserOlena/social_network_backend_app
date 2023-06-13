@@ -16,9 +16,18 @@ const createUser = async (req, res) => {
 // retrieve all the users from the mongo DB
 const retrieveAllUsers = async (req, res) => {
     try {
-        console.log('get')
         const usersData = await User.find();
         res.status(200).json(usersData);
+    } catch (error) {
+        res.status(500).json(error);
+    }
+}
+
+// retrive a user by ID with Thoughts and Friends data
+const retrieveUserById = async (req, res) => {
+    try {
+        const userData = await User.findById(req.params.id).populate('thoughts friends');
+        res.status(200).json(userData);
     } catch (error) {
         res.status(500).json(error);
     }
@@ -27,4 +36,5 @@ const retrieveAllUsers = async (req, res) => {
 module.exports = {
     createUser,
     retrieveAllUsers,
+    retrieveUserById,
 }
