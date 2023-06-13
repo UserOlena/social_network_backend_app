@@ -3,6 +3,7 @@ const {
     createUser,
     retrieveAllUsers,
     retrieveUserById,
+    updateUser,
 } = require('../../controllers/userController');
 
 // create new user
@@ -13,5 +14,8 @@ router.get('/', retrieveAllUsers);
 
 // retrive a user by ID
 router.get('/:id', retrieveUserById);
+
+// update user by ID
+router.put('/updateUser/:userId', updateUser);
 
 module.exports = router;
