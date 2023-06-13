@@ -4,6 +4,7 @@ const {
     retrieveAllUsers,
     retrieveUserById,
     updateUser,
+    deleteUser,
 } = require('../../controllers/userController');
 
 // create new user
@@ -17,5 +18,8 @@ router.get('/:id', retrieveUserById);
 
 // update user by ID
 router.put('/updateUser/:userId', updateUser);
+
+// delete user by ID
+router.delete('/deleteUser/:userId', deleteUser);
 
 module.exports = router;
