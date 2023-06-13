@@ -38,11 +38,7 @@ const updateUser = async (req, res) => {
     try {
         const updatedUser = await User.findByIdAndUpdate(
             { _id: req.params.userId },
-            { $push: { 
-                friends: { 
-                    $each: req.body.friends,
-                }
-            }},
+            { email: req.body.email },
             { new: true },
         );
         res.status(200).json(updatedUser);
