@@ -10,7 +10,7 @@ const thoughtSchema = new Schema({
         maxLength: 280,
     },
     createdAt: {
-        date: Date,
+        type: Date,
         default: Date.now,
         get: (date) => date.toLocaleDateString(),
     },
