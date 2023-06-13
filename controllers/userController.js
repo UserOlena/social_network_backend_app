@@ -1,4 +1,4 @@
-const { User } = require('../models');
+const { User, Thought } = require('../models');
 
 // add new user to the mongo DB
 const createUser = async (req, res) => {
