@@ -24,11 +24,12 @@ const thoughtSchema = new Schema({
     toJSON:{
         virtuals: true,
         getters: true,
-    }
+    },
+    id: false,
 }
 );
 
-// create virtual reactionCount to display on the route responce
+// create virtual reactionCount
 thoughtSchema.virtual('reactionCount').get(function () {
     return this.reactions.length;
 });
