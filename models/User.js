@@ -33,20 +33,17 @@ const userSchema = new Schema({
     ],
 },
 {
-    virtuals: {
-        friendCount: {
-            get() {
-                return this.friends.length
-            }
-        }
-    }
-},
-{
     toJSON: {
         virtuals: true,
+        id: false,
     },
 },
 );
+
+// create virtual friendCount
+userSchema.virtual('friendCount').get(function () {
+    return this.friends.length;
+});
 
 // define new model
 const User = model('User', userSchema)
