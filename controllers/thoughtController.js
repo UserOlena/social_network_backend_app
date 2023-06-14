@@ -72,10 +72,37 @@ const removeThoughtById = async (req, res) => {
     }
 }
 
+// include a reaction to a specific thought using the thought's ID.
+const addReactionToThought = async (req, res) => {
+    const { reactionBody, username } = req.body;
+    const newReactionContent = { reactionBody, username };
+
+    try {
+        const thoughtData = await Thought.findByIdAndUpdate(
+            { _id: req.params.thoughtId },
+            { $addToSet: {
+                reactions: newReactionContent,
+            } },
+            { new: true },
+        );
+
+        if (!thoughtData) {
+            return res
+                .status(404)
+                .json({ message: 'thought with the provided ID couldn\'t be found.' });
+        }
+
+        res.status(200).json(thoughtData);
+    } catch (error) {
+        res.status(500).json(error.message);
+    }
+}
+
 module.exports = {
     createThought,
     retrieveAllThoughts,
     retrieveThoughtById,
     updateThoughtById,
     removeThoughtById,
+    addReactionToThought,
 }
