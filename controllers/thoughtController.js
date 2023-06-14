@@ -1,6 +1,6 @@
 const { User, Thought } = require('../models');
 
-// add a new thought to the mongo DB
+// add a new thought to the mongo DB and pushing its ID to the user's array
 const createThought = async (req, res) => {
     try {
         // create new thought in the mongo DB
@@ -24,7 +24,7 @@ const createThought = async (req, res) => {
     }
 }
 
-//
+// retrieve all the thoughts from the mongo DB
 const retrieveAllThoughts = async (req, res) => {
     try {
         const thoughtsData = await Thought.find();
@@ -34,7 +34,7 @@ const retrieveAllThoughts = async (req, res) => {
     }
 }
 
-//
+// retrieve a thought by its ID from the mongo DB
 const retrieveThoughtById = async (req, res) => {
     try {
         const thoughtData = await Thought.findById(
@@ -46,8 +46,23 @@ const retrieveThoughtById = async (req, res) => {
     }
 }
 
+// update a thought by its ID
+const updateThoughtById = async (req, res) => {
+    try {
+        const updatedThought = await Thought.findByIdAndUpdate(
+            { _id: req.params.thoughtId },
+            { thoughtText: req.body.thoughtText },
+            { new: true },
+        );
+        res.status(200).json(updatedThought);
+    } catch (error) {
+        res.status(500).json(error.message);
+    }
+}
+
 module.exports = {
     createThought,
     retrieveAllThoughts,
     retrieveThoughtById,
+    updateThoughtById,
 }
