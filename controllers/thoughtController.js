@@ -60,9 +60,22 @@ const updateThoughtById = async (req, res) => {
     }
 }
 
+// remove a thought by its ID
+const removeThoughtById = async (req, res) => {
+    try {
+        const deletedThought = await Thought.findByIdAndDelete(
+            { _id: req.params.thoughtId },
+        );
+        res.status(200).json(deletedThought);
+    } catch (error) {
+        res.status(500).json(error.message);
+    }
+}
+
 module.exports = {
     createThought,
     retrieveAllThoughts,
     retrieveThoughtById,
     updateThoughtById,
+    removeThoughtById,
 }
