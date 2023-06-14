@@ -33,7 +33,7 @@ const retrieveUserById = async (req, res) => {
     }
 }
 
-// update user by ID and include multiple friend IDs to friends array
+// update user by ID 
 const updateUser = async (req, res) => {
     try {
         const updatedUser = await User.findByIdAndUpdate(
@@ -57,10 +57,25 @@ const deleteUser = async (req, res) => {
     }
 }
 
+// update the user's `friends` array by the user ID, including new friend's ID.
+const addFriendToUser = async (req, res) => {
+    try {
+        const updatedUser = await User.findByIdAndUpdate(
+            { _id: req.params.userId },
+            { $push: { friends: req.params.friendId } },
+            { new: true },
+        );
+        res.status(200).json(updatedUser);
+    } catch (error) {
+        res.status(500).json(error.message);
+    }
+}
+
 module.exports = {
     createUser,
     retrieveAllUsers,
     retrieveUserById,
     updateUser,
     deleteUser,
+    addFriendToUser,
 }
