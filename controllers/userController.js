@@ -95,5 +95,5 @@ module.exports = {
     updateUser,
     deleteUser,
     addFriendToUser,
-    removeFriendFromUser
+    removeFriendFromUser,
 }
