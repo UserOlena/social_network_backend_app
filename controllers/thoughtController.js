@@ -17,7 +17,7 @@ const createThought = async (req, res) => {
                 { new: true },
             );
 
-            res.status(200).json( { newThought, updatedUser } );
+            res.status(200).json( { newThought } );
         }
     } catch (error) {
         res.status(500).json(error.message);
@@ -40,7 +40,9 @@ const retrieveThoughtById = async (req, res) => {
         const thoughtData = await Thought.findById(
             { _id: req.params.thoughtId },
         );
-        res.status(200).json(thoughtData);
+
+        !thoughtData ? res.status(404).json({ message: 'Thought with the provided ID doesn\'t exist' })
+        : res.status(200).json(thoughtData);
     } catch (error) {
         res.status(500).json(error.message);
     }

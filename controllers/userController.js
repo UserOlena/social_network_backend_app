@@ -28,7 +28,9 @@ const retrieveAllUsers = async (req, res) => {
 const retrieveUserById = async (req, res) => {
     try {
         const userData = await User.findById(req.params.id).populate('thoughts friends');
-        res.status(200).json(userData);
+
+        !userData ? res.status(404).json({ message: 'User with the provided ID doesn\'t exist' })
+        : res.status(200).json(userData);
     } catch (error) {
         res.status(500).json(error);
     }
@@ -52,7 +54,9 @@ const updateUser = async (req, res) => {
 const deleteUser = async (req, res) => {
     try {
         const deletedUser = await User.findByIdAndDelete(req.params.userId);
-        res.status(200).json(deletedUser);
+
+        const deletedThought = await Thought.deleteMany({ username: deletedUser.username });
+        res.status(200).json( { deletedUser, deletedThought } );
     } catch (error) {
         res.status(500).json(error.message);
     }
