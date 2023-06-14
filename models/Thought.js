@@ -21,15 +21,6 @@ const thoughtSchema = new Schema({
     reactions: [reactionSchema],
 },
 {
-    virtuals: {
-        reactionCount: {
-            get () {
-                return this.reactions.length;
-            }
-        }
-    }
-},
-{
     toJSON:{
         virtuals: true,
         getters: true,
@@ -37,6 +28,12 @@ const thoughtSchema = new Schema({
 }
 );
 
+// create virtual reactionCount to display on the route responce
+thoughtSchema.virtual('reactionCount').get(function () {
+    return this.reactions.length;
+});
+
+// define new Thought model
 const Thought = model('Thought', thoughtSchema);
 
 module.exports = Thought;
