@@ -6,10 +6,14 @@ const {
     updateUser,
     deleteUser,
     addFriendToUser,
+    removeFriendFromUser,
 } = require('../../controllers/userController');
 
 // create new user
 router.post('/createUser', createUser);
+
+// update the user's `friends` array by the user ID, including new friend's ID.
+router.post('/:userId/friends/:friendId', addFriendToUser);
 
 // retrieve all the users from the mongo DB
 router.get('/', retrieveAllUsers);
@@ -23,7 +27,7 @@ router.put('/updateUser/:userId', updateUser);
 // delete user by ID
 router.delete('/deleteUser/:userId', deleteUser);
 
-// update the user's `friends` array by the user ID, including new friend's ID.
-router.post('/:userId/friends/:friendId', addFriendToUser);
+// remove a friend from the user's friends array using both the user's ID and the friend's ID
+router.delete('/:userId/friends/:friendId', removeFriendFromUser);
 
 module.exports = router;
