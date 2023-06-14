@@ -24,6 +24,17 @@ const createThought = async (req, res) => {
     }
 }
 
+//
+const retrieveAllThoughts = async (req, res) => {
+    try {
+        const thoughtsData = await Thought.find();
+        res.status(200).json(thoughtsData);
+    } catch (error) {
+        res.status(500).json(error.message);
+    }
+}
+
 module.exports = {
     createThought,
+    retrieveAllThoughts,
 }
