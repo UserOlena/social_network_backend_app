@@ -1,4 +1,5 @@
 const { User, Thought } = require('../models');
+const { rawListeners } = require('../models/User');
 
 // add new user to the mongo DB
 const createUser = async (req, res) => {
@@ -71,6 +72,22 @@ const addFriendToUser = async (req, res) => {
     }
 }
 
+// remove a friend from the user's friends array using both the user's ID and the friend's ID
+const removeFriendFromUser = async (req, res) => {
+    try {
+        const updatedUser = await User.findByIdAndUpdate(
+            { _id: req.params.userId },
+            { $pull: {
+                friends: req.params.friendId,
+            } },
+            { new: true },
+        );
+        res.status(200).json(updatedUser);
+    } catch (error) {
+        res.status(500).json(error.message);
+    }
+}
+
 module.exports = {
     createUser,
     retrieveAllUsers,
@@ -78,4 +95,5 @@ module.exports = {
     updateUser,
     deleteUser,
     addFriendToUser,
+    removeFriendFromUser
 }
