@@ -34,7 +34,20 @@ const retrieveAllThoughts = async (req, res) => {
     }
 }
 
+//
+const retrieveThoughtById = async (req, res) => {
+    try {
+        const thoughtData = await Thought.findById(
+            { _id: req.params.thoughtId },
+        );
+        res.status(200).json(thoughtData);
+    } catch (error) {
+        res.status(500).json(error.message);
+    }
+}
+
 module.exports = {
     createThought,
     retrieveAllThoughts,
+    retrieveThoughtById,
 }
