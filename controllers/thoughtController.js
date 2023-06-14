@@ -98,6 +98,29 @@ const addReactionToThought = async (req, res) => {
     }
 }
 
+// remove a reaction by its ID from a specific thought using the thought's ID.
+const removeReactionFromThought = async (req, res) => {
+    try {
+        const updatedThought = await Thought.findByIdAndUpdate(
+            { _id: req.params.thoughtId },
+            { $pull: {
+                reactions: { reactionId: req.body.reactionId },
+            } },
+            { new: true },
+        );
+
+        if (!updatedThought) {
+            return res
+                .status(404)
+                .json({ message: 'Thought with the provided ID couldn\'t be found.' });
+        }
+
+        res.status(200).json(updatedThought);
+    } catch (error) {
+        res.status(500).json(error.message);
+    }
+}
+
 module.exports = {
     createThought,
     retrieveAllThoughts,
@@ -105,4 +128,5 @@ module.exports = {
     updateThoughtById,
     removeThoughtById,
     addReactionToThought,
+    removeReactionFromThought,
 }

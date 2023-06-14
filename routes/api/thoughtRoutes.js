@@ -6,6 +6,7 @@ const {
     updateThoughtById,
     removeThoughtById,
     addReactionToThought,
+    removeReactionFromThought,
 } = require('../../controllers/thoughtController');
 
 // add a new thought to the mongo DB
@@ -25,5 +26,8 @@ router.delete('/:thoughtId', removeThoughtById);
 
 //  create a reaction stored in a single thought's reactions array field
 router.post('/:thoughtId/reactions', addReactionToThought);
+
+//  create a reaction stored in a single thought's reactions array field
+router.delete('/:thoughtId/reactions', removeReactionFromThought);
 
 module.exports = router;
