@@ -9,7 +9,7 @@ The `Social_Network_Backend_app` app was developed as a component of the Berkele
 ---
 ## Table of Contents
 * [General Information](#general-information)
-* [Preview](#preview)
+* [Walk-through Video ](#walk-through-video)
 * [Technologies Used](#technologies-used)
 * [Installation](#installation)
 * [Usage](#usage)
@@ -24,10 +24,9 @@ The `Social_Network_Backend_app` app was developed as a component of the Berkele
 The main purpose of the `Social_Network_Backend_app` application is to improve the online social networking experience by facilitating the storage and administration of user data in a database. The development of the application was done accordingly to [user story](#user-story) and [acceptance criteria](#acceptance-criteria). 
 
 ---
-## Preview 
-![Preview](./assets/Walkthrough_Video.mp4)
+## Walk-through Video 
 
-https://1drv.ms/v/s!Ak2qWe8ZT6ny3DIKokTMlmWfpVV-?e=CzZu3N
+
 
 ---
 ## Technologies Used
