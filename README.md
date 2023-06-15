@@ -4,7 +4,7 @@
 
 --- 
 The `Social_Network_Backend_app` app was developed as a component of the Berkeley Coding Bootcamp Challenge 18. Once combined with the UI, this app allows for the administration of user communication within an internet-based social network and secure storage of user information. It utilizes mongo DB and mongoose for this purpose.
-- The walk-through videos showcasing the operation of the Social_Network_Backend_app application can be located in the [Walk-through Video](#walk-through-video) section. Alternatively, you can access the video through cloud storage by following this  [link](https://1drv.ms/v/s!Ak2qWe8ZT6ny3DIKokTMlmWfpVV-?e=CzZu3N).
+- The walk-through video showcasing the operation of the Social_Network_Backend_app application can be located in the [Walk-through Video](#walk-through-video) section. Alternatively, you can access the video through cloud storage by following this  [link](https://1drv.ms/v/s!Ak2qWe8ZT6ny3DIKokTMlmWfpVV-?e=CzZu3N).
 
 ---
 ## Table of Contents
@@ -46,33 +46,33 @@ https://github.com/UserOlena/social_network_backend_app/assets/122197592/fd9383c
 ---
 ## Installation
 
-### Prerequisites
+***Prerequisites***
 
 - [node.js v18.16.0](https://nodejs.org/en/) - It is recommended to download `node.js v18.16.0` since this application has only been tested with that version. 
 - [mongoDb v6.0.6](https://www.mongodb.com/) - It is recommended to download `mongoDb v6.0.6` since this application has only been tested with that version. 
 
-### Local Installation
+***Local Installation***
 
 To use the `Social_Network_Backend_app`, the user needs to complete the following steps: 
 
 1. Clone the repository:
-    - Go to the [Git-Hub](https://github.com/UserOlena/social_network_backend_app)
-    - Clone the repository to your local computer.
+  - Go to the [Git-Hub](https://github.com/UserOlena/social_network_backend_app)
+  - Clone the repository to your local computer.
 2. Navigate to the Social_Network_Backend_app directory:
-    - Open a command line interface (e.g., Terminal).
-    - Change directory to the Social_Network_Backend_app repository location. Use the command `cd ~/...` and replace `...` with the path to the Social_Network_Backend_app directory.  It is crucial to ensure that packages are installed within the Social_Network_Backend_app directory, where `server.js` is located. 
+  - Open a command line interface (e.g., Terminal).
+  - Change directory to the Social_Network_Backend_app repository location. Use the command `cd ~/...` and replace `...` with the path to the Social_Network_Backend_app directory.  It is crucial to ensure that packages are installed within the Social_Network_Backend_app directory, where `server.js` is located. 
 3. Initialize Node.js modules:
-    - In the command line, while in the Social_Network_Backend_app directory, run the command `npm i`.
-    - This command will install the required Node.js modules for the application to function.
+  - In the command line, while in the Social_Network_Backend_app directory, run the command `npm i`.
+  - This command will install the required Node.js modules for the application to function.
 4. Provide your database and server information in the .envExample file:
-    - Locate the .envExample file in the cloned repository.
-    - Open the file and enter your `server port` and `database name`, as well as any other required information.
-    - Remove the word `EXAMPLE` from the file name, so it becomes `.env`.
+  - Locate the .envExample file in the cloned repository.
+  - Open the file and enter your `server port` and `database name`, as well as any other required information.
+  - Remove the word `EXAMPLE` from the file name, so it becomes `.env`.
 
-    By following this step, you will be able to provide your database and server information in the .env file, allowing the application to connect to the database and server correctly.
+  By following this step, you will be able to provide your database and server information in the .env file, allowing the application to connect to the database and server correctly.
 5. Start the application:
-    - In the command line, type `node server` to start the server.
-    - The application should now be up and running.
+  - In the command line, type `node server` to start the server.
+  - The application should now be up and running.
 
 These steps should guide you through the process of setting up and running the Social_Network_Backend_app successfully.
 
@@ -106,7 +106,7 @@ THEN I am able to successfully create and delete reactions to thoughts and add a
 ---
 ### Additional Requarements
 
-#### Database Models
+***Database Models***
 
 Database should contain the following three schemas, including the requirements listed for each model:
 
@@ -135,7 +135,6 @@ Database should contain the following three schemas, including the requirements 
 Create a virtual called `friendCount` that retrieves the length of the user's `friends` array field on query.
 
 ---
-
 **Thought**:
 
 * `thoughtText`
@@ -160,7 +159,6 @@ Create a virtual called `friendCount` that retrieves the length of the user's `f
 Create a virtual called `reactionCount` that retrieves the length of the thought's `reactions` array field on query.
 
 ---
-
 **Reaction** (SCHEMA ONLY)
 
 * `reactionId`
@@ -199,7 +197,7 @@ This will not be a model, but rather will be used as the `reaction` field's subd
 ```json
 // example data
 {
-    "username": "lernantino",
+  "username": "lernantino",
   "email": "lernantino@gmail.com"
 }
 ```
@@ -229,7 +227,7 @@ This will not be a model, but rather will be used as the `reaction` field's subd
 ```json
 // example data
 {
-    "thoughtText": "Here's a cool thought...",
+  "thoughtText": "Here's a cool thought...",
   "username": "lernantino",
   "userId": "5edff358a0fcb779aa7b118b"
 }
@@ -240,7 +238,6 @@ This will not be a model, but rather will be used as the `reaction` field's subd
 * `DELETE` to remove a thought by its `_id`
 
 ---
-
 **`/api/thoughts/:thoughtId/reactions`**
 
 * `POST` to create a reaction stored in a single thought's `reactions` array field
