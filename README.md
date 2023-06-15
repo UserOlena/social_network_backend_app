@@ -26,7 +26,13 @@ The main purpose of the `Social_Network_Backend_app` application is to improve t
 ---
 ## Walk-through Video 
 
+**User API**
 
+https://github.com/UserOlena/social_network_backend_app/assets/122197592/0ec08d2e-7c35-4ec3-93b0-ab69adf20a15
+
+**Thought API**
+
+https://github.com/UserOlena/social_network_backend_app/assets/122197592/fd9383c5-a182-45d6-a694-4c65fc78c431
 
 ---
 ## Technologies Used
