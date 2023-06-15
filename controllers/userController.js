@@ -10,7 +10,7 @@ const createUser = async (req, res) => {
         });
         res.status(200).json(newUser);
     } catch (error) {
-        res.status(500).json(error);
+        res.status(500).json(error.message);
     }
 }
 
@@ -18,9 +18,14 @@ const createUser = async (req, res) => {
 const retrieveAllUsers = async (req, res) => {
     try {
         const usersData = await User.find();
-        res.status(200).json(usersData);
+
+        if (usersData) {
+            res.status(200).json(usersData);
+        } else {
+            res.status(404).json({ message: 'Users couldn\'t be found.' });
+        }
     } catch (error) {
-        res.status(500).json(error);
+        res.status(500).json(error.message);
     }
 }
 
@@ -29,10 +34,13 @@ const retrieveUserById = async (req, res) => {
     try {
         const userData = await User.findById(req.params.id).populate('thoughts friends');
 
-        !userData ? res.status(404).json({ message: 'User with the provided ID doesn\'t exist' })
-        : res.status(200).json(userData);
+        if (userData) {
+            res.status(200).json(userData);
+        } else {
+            res.status(404).json({ message: 'User with the provided ID doesn\'t exist' });
+        }
     } catch (error) {
-        res.status(500).json(error);
+        res.status(500).json(error.message);
     }
 }
 
@@ -44,7 +52,12 @@ const updateUser = async (req, res) => {
             { email: req.body.email },
             { new: true },
         );
-        res.status(200).json(updatedUser);
+
+        if (updatedUser) {
+            res.status(200).json(updatedUser);
+        } else {
+            res.status(404).json({ message: 'User with the provided ID doesn\'t exist' });
+        }        
     } catch (error) {
         res.status(500).json(error.message);
     }
@@ -54,6 +67,11 @@ const updateUser = async (req, res) => {
 const deleteUser = async (req, res) => {
     try {
         const deletedUser = await User.findByIdAndDelete(req.params.userId);
+
+        if (!deletedUser) {
+            res.status(404).json({ message: 'User with the provided ID doesn\'t exist' });
+            return;
+        }
 
         const deletedThought = await Thought.deleteMany({ username: deletedUser.username });
         res.status(200).json( { deletedUser, deletedThought } );
@@ -70,6 +88,10 @@ const addFriendToUser = async (req, res) => {
             { $push: { friends: req.params.friendId } },
             { new: true },
         );
+        if (!updatedUser) {
+            res.status(404).json({ message: 'User with the provided ID doesn\'t exist' });
+            return;
+        }
         res.status(200).json(updatedUser);
     } catch (error) {
         res.status(500).json(error.message);
@@ -86,6 +108,10 @@ const removeFriendFromUser = async (req, res) => {
             } },
             { new: true },
         );
+        if (!updatedUser) {
+            res.status(404).json({ message: 'User with the provided ID doesn\'t exist' });
+            return;
+        }
         res.status(200).json(updatedUser);
     } catch (error) {
         res.status(500).json(error.message);
