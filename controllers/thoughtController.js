@@ -13,11 +13,17 @@ const createThought = async (req, res) => {
         if (newThought) {
             const updatedUser = await User.findOneAndUpdate(
                 { _id: req.body.userId },
-                { $push: { thoughts: newThought.id } },
+                { $push: { thoughts: newThought._id } },
                 { new: true },
             );
-
-            res.status(200).json( { newThought } );
+            if (!updatedUser) {
+                const deletedThought = await Thought.findByIdAndDelete(
+                    { _id: newThought._id },
+                );
+                res.status(404).json({ message: 'Thought couldn\'t be saved because the user with the provided ID doesn\'t exist' });
+                return;
+            }
+            res.status(200).json({ newThought });
         }
     } catch (error) {
         res.status(500).json(error.message);
@@ -28,7 +34,12 @@ const createThought = async (req, res) => {
 const retrieveAllThoughts = async (req, res) => {
     try {
         const thoughtsData = await Thought.find();
-        res.status(200).json(thoughtsData);
+
+        if (thoughtsData.length > 0) {
+            res.status(200).json(thoughtsData);
+        } else {
+            res.status(404).json({ message: 'Thoughts couldn\'t be found.' });
+        }
     } catch (error) {
         res.status(500).json(error.message);
     }
@@ -40,9 +51,11 @@ const retrieveThoughtById = async (req, res) => {
         const thoughtData = await Thought.findById(
             { _id: req.params.thoughtId },
         );
-
-        !thoughtData ? res.status(404).json({ message: 'Thought with the provided ID doesn\'t exist' })
-        : res.status(200).json(thoughtData);
+        if (thoughtData) {
+            res.status(200).json(thoughtData);
+        } else {
+            res.status(404).json({ message: 'Thought with the provided ID doesn\'t exist' });
+        }
     } catch (error) {
         res.status(500).json(error.message);
     }
@@ -56,7 +69,11 @@ const updateThoughtById = async (req, res) => {
             { thoughtText: req.body.thoughtText },
             { new: true },
         );
-        res.status(200).json(updatedThought);
+        if (updatedThought) {
+            res.status(200).json(updatedThought);
+        } else {
+            res.status(404).json({ message: 'Thought with the provided ID doesn\'t exist' });
+        }        
     } catch (error) {
         res.status(500).json(error.message);
     }
@@ -68,6 +85,10 @@ const removeThoughtById = async (req, res) => {
         const deletedThought = await Thought.findByIdAndDelete(
             { _id: req.params.thoughtId },
         );
+        if (!deletedThought) {
+            res.status(404).json({ message: 'Thought with the provided ID doesn\'t exist' });
+            return;
+        }
         res.status(200).json(deletedThought);
     } catch (error) {
         res.status(500).json(error.message);
@@ -87,13 +108,9 @@ const addReactionToThought = async (req, res) => {
             } },
             { new: true },
         );
-
         if (!thoughtData) {
-            return res
-                .status(404)
-                .json({ message: 'thought with the provided ID couldn\'t be found.' });
+            res.status(404).json({ message: 'Thought with the provided ID couldn\'t be found.' });
         }
-
         res.status(200).json(thoughtData);
     } catch (error) {
         res.status(500).json(error.message);
@@ -110,14 +127,11 @@ const removeReactionFromThought = async (req, res) => {
             } },
             { new: true },
         );
-
         if (!updatedThought) {
-            return res
-                .status(404)
-                .json({ message: 'Thought with the provided ID couldn\'t be found.' });
+            res.status(404).json({ message: 'Thought with the provided ID couldn\'t be found.' });
+        } else {
+            res.status(200).json(updatedThought);
         }
-
-        res.status(200).json(updatedThought);
     } catch (error) {
         res.status(500).json(error.message);
     }
