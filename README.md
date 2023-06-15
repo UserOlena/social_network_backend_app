@@ -4,12 +4,12 @@
 
 --- 
 The `Social_Network_Backend_app` app was developed as a component of the Berkeley Coding Bootcamp Challenge 18. Once combined with the UI, this app allows for the administration of user communication within an internet-based social network and secure storage of user information. It utilizes mongo DB and mongoose for this purpose.
-- The recorded [video](https://1drv.ms/v/s!Ak2qWe8ZT6ny3DIKokTMlmWfpVV-?e=CzZu3N) on the screen demonstrates how the Social_Network_Backend_app application operates.
+- The walk-through videos showcasing the operation of the Social_Network_Backend_app application can be located in the [Walk-through Video](#walk-through-video) section. Alternatively, you can access the video through cloud storage by following this  [link](https://1drv.ms/v/s!Ak2qWe8ZT6ny3DIKokTMlmWfpVV-?e=CzZu3N).
 
 ---
 ## Table of Contents
 * [General Information](#general-information)
-* [Walk-through Video ](#walk-through-video)
+* [Walk-through Video](#walk-through-video)
 * [Technologies Used](#technologies-used)
 * [Installation](#installation)
 * [Usage](#usage)
